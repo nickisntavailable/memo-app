@@ -1,0 +1,26 @@
+.nav-item {
+  display: block;
+  background: linear-gradient(208.18deg, #67c3f3 9.05%, #5a98f2 76.74%);
+  border-radius: 24px;
+  width: 100%;
+  padding: 30px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: azure;
+  display: flex;
+  justify-content: space-between;
+
+  & .arrow-right {
+      opacity: 0;
+  }
+
+  &:hover {
+    background: linear-gradient(208.18deg, #1c9bdf 9.05%, #7cabf1 76.74%);
+    color: azure;
+  }
+  
+  &:hover .arrow-right {
+      opacity: 1;
+      transition: all .3s ease-in-out;
+  }
+}
