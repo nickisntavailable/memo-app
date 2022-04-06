@@ -17,6 +17,13 @@
     line-height: 39px;
     letter-spacing: 0.1em;
     text-transform: capitalize;
-    color: #2B2B2B;
+    & a {
+      color: #2B2B2B;
+      text-decoration: none;
+    }
+    & a:hover {
+      color: #2B2B2B;
+      text-decoration: none;
+    }
   }
 }

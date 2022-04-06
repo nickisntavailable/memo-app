@@ -3,7 +3,7 @@ import NavItem from "../../components/NavItem/NavItem"
 const navigationItems = [
     {
         title: "Изучить своих коллег",
-        url: "/"
+        url: "/colleague"
     },
     {
         title: "Пройти тест с вариантами ответа",
