@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ArrowRight from "../Icons/ArrowRight";
+import Arrow from "../Icons/Arrow";
 import './NavItem.scss';
 
 type NavItemProps = {
@@ -11,7 +11,7 @@ const NavItem = ({ title, url }: NavItemProps) => {
     return (
        <Link to={url} className="nav-item">
            {title}
-           <ArrowRight/>
+           <Arrow/>
        </Link>
     )
 };

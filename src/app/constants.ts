@@ -1,0 +1,2 @@
+export const SET_COLLEAGUES = "SET_COLLEAGUES";
+export const SET_QUESTIONS = "SET_QUESTIONS";

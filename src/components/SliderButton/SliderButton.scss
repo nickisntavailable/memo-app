@@ -1,0 +1,21 @@
+.slider-btn {
+  height: 400px;
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: 10%;
+  &:hover {
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  }
+  &:disabled:hover {
+    box-shadow: none;
+    cursor: no-drop;
+  }
+  & .arrow-right {
+    margin: 0 0 0 auto;
+  }
+  & .arrow-right.reverse {
+    margin: 0 auto 0 0;
+  }
+}
