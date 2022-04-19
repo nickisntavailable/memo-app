@@ -6,6 +6,8 @@ import Colleague from "./routes/Сolleague/Colleague";
 import { useEffect } from "react";
 import { getData } from "app/actions/actionData";
 import { useDispatch } from "react-redux";
+import Questions from "routes/Questions/Questions";
+import QuestionsShort from "routes/QuestionsShort/QuestionsShort";
 
 function App() {
   const dispatch = useDispatch()
@@ -20,6 +22,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/colleague" element={<Colleague />} />
+      <Route path="/questions" element={<Questions />} />
+      <Route path="/questions-short" element={<QuestionsShort />} />
     </Routes>
     </div>
   );

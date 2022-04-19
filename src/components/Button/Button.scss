@@ -1,0 +1,20 @@
+.btn {
+    border-radius: 10px;
+    background-color: #1c9bdf;
+    padding: 10px 30px;
+    transition: all .3s ease-in-out;
+    color: #f9f9f9;
+    &:hover {
+        background-color: #2a7efc;
+        color: #dcdcdc;
+    }
+    &.sm {
+        padding: 10px 30px;
+    }
+    &.md {
+        padding: 15px 45px;
+    }
+    &.lg {
+        padding: 20px 60px;
+    }
+}

@@ -7,11 +7,11 @@ const navigationItems = [
     },
     {
         title: "Пройти тест с вариантами ответа",
-        url: "/"
+        url: "/questions"
     },
     {
         title: "Пройти тест Да-Нет",
-        url: "/"
+        url: "/questions-short"
     }
 ]
 

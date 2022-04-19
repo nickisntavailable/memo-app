@@ -1,5 +1,7 @@
 import { FullQuestionType, PersonType } from "./types";
 
+const STOP_WORD = '-'
+
 const getRandom = (list: any[]) => {
   return list[Math.floor(Math.random() * list.length)];
 };
@@ -11,19 +13,21 @@ function shuffle(array: any[]) {
 }
 
 const getNameOptions = (data: PersonType[], breakWord: string) => {
-  let options = [];
+  let options: string[] = [];
   while (options.length < 3) {
     let variant = getRandom(data).name;
     if (variant === breakWord) continue;
+    if (options.includes(variant)) continue;
     options.push(variant);
   }
   return [...options, breakWord];
 };
 const getOptionsFromPossibleVariants = (data: string[], breakWord: string) => {
-  let options = [];
+  let options: string[] = [];
   while (options.length < 3) {
     let variant = getRandom(data);
     if (variant === breakWord) continue;
+    if (options.includes(variant)) continue;
     options.push(variant);
   }
   return [...options, breakWord];
@@ -47,8 +51,8 @@ export const generateQuestions = (data: PersonType[]) => {
     ...photoQuestions,
     ...questionswork,
     ...questionsSport,
-  ] as FullQuestionType[]
-  shuffle(res)
+  ] as FullQuestionType[];
+  shuffle(res);
   return res;
 };
 
@@ -58,11 +62,14 @@ const generateGeneral = (
   question2: string,
   prop_name: keyof PersonType
 ) => {
-  const possibleVariants = [
-    ...new Set(data.map((e: PersonType) => e[prop_name])),
-  ] as string[];
+  const possibleVariants = (
+    [...new Set(data.map((e: PersonType) => e[prop_name]))] as string[]
+  ).filter((e) => e !== STOP_WORD);
+
   const resultArrayFirstType = data.map((person) => {
-    if ((person[prop_name] as string) === "-") return null;
+    if ((person[prop_name] as string) === STOP_WORD) {
+      return null;
+    }
     let options = getOptionsFromPossibleVariants(
       possibleVariants,
       person[prop_name] as string
@@ -74,7 +81,7 @@ const generateGeneral = (
     };
   });
   const resultArraySecondType = data.map((person, _, arr) => {
-    if ((person[prop_name] as string) === "-") return null;
+    if ((person[prop_name] as string) === STOP_WORD) return null;
     let options = getNameOptions(arr, person.name);
     return {
       question: `${question2} ${person[prop_name] as string}?`,

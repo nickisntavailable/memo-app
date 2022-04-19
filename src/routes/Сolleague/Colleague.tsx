@@ -8,12 +8,15 @@ import ColleagueCard from "components/ColleagueCard/ColleagueCard";
 import { useState } from "react";
 import Arrow from "components/Icons/Arrow";
 import SliderButton from "components/SliderButton/SliderButton";
+import Button from "components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Colleague = () => {
   const cards = useSelector<RootState>(
     (state: RootState) => state.data.colleagues
   ) as PersonType[];
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate()
 
   const isFirst = index === 0;
   const isLast = index === cards.length - 1;
@@ -40,7 +43,8 @@ const Colleague = () => {
         </SliderButton>
       </div>
       <div className={isLast ? "colleague-retry active" : "colleague-retry"}>
-        <button onClick={() => setIndex(0)}>Начать сначала</button>
+        <Button onClick={() => setIndex(0)}>Начать сначала</Button>
+        <Button onClick={() => navigate('/')}>Вернуться на главную</Button>
       </div>
     </div>
   );

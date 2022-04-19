@@ -24,6 +24,10 @@
   &-retry {
     opacity: 0;
     transition: all .3s ease-in-out;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     &.active {
       opacity: 1;
     }

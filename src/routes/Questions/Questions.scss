@@ -1,0 +1,21 @@
+.questions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    &-footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        & p {
+            flex: 1 1 100%;
+            margin: 0;
+            & span {
+                font-weight: bold;
+            }
+        }
+        & .btn {
+            flex: 1 1 48%;
+        }
+    }
+}
