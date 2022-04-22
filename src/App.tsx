@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getData())
-  })
+  },[])
   return (
     <div className="app">
     <div className="app-header">

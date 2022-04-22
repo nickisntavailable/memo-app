@@ -24,7 +24,7 @@ const Colleague = () => {
   return (
     <div className="container-sm colleague">
       <div className="colleague-swiper">
-        <SliderButton disabled={isFirst} onClick={() => setIndex(index - 1)}>
+        <SliderButton disabled={isFirst} onClick={() => setIndex((p)=>p - 1)}>
           <Arrow classes="blue lg reverse" />
         </SliderButton>
         <div className="colleague-swiper-container">

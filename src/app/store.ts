@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "app/reducers/index";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { FullQuestionType, PersonType } from "./types";
+import { FullQuestionType, PersonType, ShortQUestionType } from "./types";
 
 const initialState = {
   data: {
@@ -14,6 +14,7 @@ export type RootState = {
   data: {
     colleagues: PersonType[],
     questions: FullQuestionType[]
+    questionsShort: ShortQUestionType[]
 }
 }
 

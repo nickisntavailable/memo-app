@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 import "./Questions.scss";
 
 const questionsCount = 10;
+const generateTest = (data: FullQuestionType[]) => {
+  const rand = Math.floor(Math.random() * (data.length - questionsCount));
+    return data.slice(rand, rand + questionsCount)
+};
 
 const Questions = () => {
   const [questions, setQuestions] = useState<FullQuestionType[]>([]);
@@ -20,15 +24,10 @@ const Questions = () => {
   const navigator = useNavigate();
   const [wrong, setWrong] = useState(0);
 
-  const generateTest = (data: FullQuestionType[]) => {
-    if (data.length > 0) {
-      const rand = Math.floor(Math.random() * (data.length - questionsCount));
-      setQuestions(data.slice(rand, rand + questionsCount));
-    }
-  };
+  
 
   useEffect(() => {
-    generateTest(data);
+    setQuestions (generateTest(data));
   }, [data]);
 
   const handleUncorrect = () => {
@@ -37,10 +36,10 @@ const Questions = () => {
   };
   const handleСorrect = () => {
     setIsChosen("");
-    setQuestions(questions.slice(1));
+    setQuestions(q=>q.slice(1));
   };
   const handleTryAgain = () => {
-    generateTest(data);
+    setQuestions (generateTest(data));
     setIsChosen("");
     setWrong(0);
   };

@@ -1,12 +1,17 @@
-import { SET_COLLEAGUES, SET_QUESTIONS } from "app/constants";
-import { FullQuestionType, PersonType } from "app/types";
+import {
+  SET_COLLEAGUES,
+  SET_QUESTIONS,
+  SET_QUESTIONS_SHORT,
+} from "app/constants";
+import { FullQuestionType, PersonType, ShortQUestionType } from "app/types";
 
 interface IAction {
-    type: string
-    payload: {
-        colleagues?: PersonType[]
-        questions?: FullQuestionType[]
-    }
+  type: string;
+  payload: {
+    colleagues?: PersonType[];
+    questions?: FullQuestionType[];
+    questionsShort?: ShortQUestionType[];
+  };
 }
 
 const data = (state = [], action: IAction) => {
@@ -20,6 +25,11 @@ const data = (state = [], action: IAction) => {
       return {
         ...state,
         questions: action.payload.questions,
+      };
+    case SET_QUESTIONS_SHORT:
+      return {
+        ...state,
+        questionsShort: action.payload.questionsShort,
       };
     default:
       return state;

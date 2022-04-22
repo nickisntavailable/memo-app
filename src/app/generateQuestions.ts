@@ -1,6 +1,6 @@
-import { FullQuestionType, PersonType } from "./types";
+import { FullQuestionType, PersonType, ShortQUestionType } from "./types";
 
-const STOP_WORD = '-'
+const STOP_WORD = "-";
 
 const getRandom = (list: any[]) => {
   return list[Math.floor(Math.random() * list.length)];
@@ -31,29 +31,6 @@ const getOptionsFromPossibleVariants = (data: string[], breakWord: string) => {
     options.push(variant);
   }
   return [...options, breakWord];
-};
-
-export const generateQuestions = (data: PersonType[]) => {
-  const photoQuestions = generatePhoto(data);
-  const questionswork = generateGeneral(
-    data,
-    "Где раньше работал",
-    "Кто из коллег раньше работал в комании",
-    "prev_work"
-  );
-  const questionsSport = generateGeneral(
-    data,
-    "Каким спортом занимается",
-    "Кто из коллег любит этот вид спорта - ",
-    "sport"
-  );
-  const res = [
-    ...photoQuestions,
-    ...questionswork,
-    ...questionsSport,
-  ] as FullQuestionType[];
-  shuffle(res);
-  return res;
 };
 
 const generateGeneral = (
@@ -107,3 +84,88 @@ export const generatePhoto = (data: PersonType[]) => {
   });
   return resultArray;
 };
+
+export const generateQuestions = (data: PersonType[]) => {
+  const photoQuestions = generatePhoto(data);
+  const questionswork = generateGeneral(
+    data,
+    "Где раньше работал",
+    "Кто из коллег раньше работал в комании",
+    "prev_work"
+  );
+  const questionsSport = generateGeneral(
+    data,
+    "Каким спортом занимается",
+    "Кто из коллег любит этот вид спорта - ",
+    "sport"
+  );
+  const res = [
+    ...photoQuestions,
+    ...questionswork,
+    ...questionsSport,
+  ] as FullQuestionType[];
+  shuffle(res);
+  return res;
+};
+
+export const generateQuestionsShort = (data: PersonType[]) => {
+  const photoQuestions = generatePhotoShort(data);
+  const questionswork = generateGeneralShort(
+    data,
+    "раньше работал в",
+    "раньше работала в",
+    "prev_work"
+  );
+  const questionsSport = generateGeneralShort(
+    data,
+    "увлекался этим видом спорта -",
+    "увлекалась этим видом спорта -",
+    "sport"
+  );
+  const res = [
+    ...photoQuestions,
+    ...questionswork,
+    ...questionsSport,
+  ] as ShortQUestionType[];
+  shuffle(res);
+  return res;
+};
+
+function generatePhotoShort(data: PersonType[]): ShortQUestionType[] {
+  const result = data.reduce((prev, cur, _, arr): any => {
+    const mappedArr = arr.map((p) => {
+      const question =
+        cur.gender === "м"
+          ? `На фото изображен ${cur.name}?`
+          : `На фото изображена ${cur.name}?`;
+      return p.name === cur.name
+        ? { question, photo: cur.photo, answer: true }
+        : { question, photo: cur.photo, answer: false };
+    });
+    return [...prev, ...mappedArr]
+  }, [] as ShortQUestionType[]);
+  return result;
+}
+function generateGeneralShort(
+  data: PersonType[],
+  questionMale: string,
+  questionFemale: string,
+  prop_name: keyof PersonType
+) {
+  const possibleVariants = [...new Set(data.map((e) => e[prop_name]))].filter(
+    (e) => e !== STOP_WORD
+  );
+  const result = data.reduce((prev, person): any => {
+    const question =
+      person.gender === "м"
+        ? `${person.name} ${questionMale}`
+        : `${person.name} ${questionFemale}`;
+    const arr = possibleVariants.map((v) => {
+      return v === person[prop_name]
+        ? { question: `${question} ${v}?`, answer: true }
+        : { question: `${question} ${v}?`, answer: false };
+    });
+    return [...prev, ...arr];
+  }, [] as ShortQUestionType[]);
+  return result;
+}

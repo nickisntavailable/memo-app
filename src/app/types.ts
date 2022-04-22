@@ -12,3 +12,9 @@ export type FullQuestionType = {
   answer: string;
   options: string[];
 };
+
+export type ShortQUestionType = {
+  question: string;
+  photo?: string;
+  answer: boolean;
+}
