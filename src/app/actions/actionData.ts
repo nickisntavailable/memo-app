@@ -4,7 +4,7 @@ import { FullQuestionType, ShortQUestionType } from "app/types";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
-
+const API_URL = "../data/data.json"
 
 export const setData = (colleagues: []) => {
   return {
@@ -33,7 +33,7 @@ export const setQuestions = (questions: FullQuestionType[]) => {
 
 export const getData: any = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-    const res = await fetch("../data/data.json");
+    const res = await fetch(API_URL);
     const data = await res.json();
     dispatch(setData(data));
     const questions = generateQuestions(data)
