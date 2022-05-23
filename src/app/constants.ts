@@ -1,3 +1,9 @@
 export const SET_COLLEAGUES = "SET_COLLEAGUES";
 export const SET_QUESTIONS = "SET_QUESTIONS";
 export const SET_QUESTIONS_SHORT = "SET_QUESTIONS_SHORT";
+
+
+export const MIN_TEST_LENGTH = 4;
+export const MAX_TEST_LENGTH = 20;
+
+export const SET_TEST_LENGTH = "SET_TEST_LENGTH";

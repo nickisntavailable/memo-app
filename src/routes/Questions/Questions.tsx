@@ -9,13 +9,16 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Questions.scss";
 
-const questionsCount = 10;
-const generateTest = (data: FullQuestionType[]) => {
+// const questionsCount = 10;
+const generateTest = (data: FullQuestionType[], questionsCount: number) => {
   const rand = Math.floor(Math.random() * (data.length - questionsCount));
     return data.slice(rand, rand + questionsCount)
 };
 
 const Questions = () => {
+  const questionsCount = useSelector<RootState>(
+    (state) => state.tests.testLength
+  ) as number;
   const [questions, setQuestions] = useState<FullQuestionType[]>([]);
   const data = useSelector<RootState>(
     (state) => state.data.questions
@@ -27,19 +30,19 @@ const Questions = () => {
   
 
   useEffect(() => {
-    setQuestions (generateTest(data));
-  }, [data]);
+    setQuestions (generateTest(data, questionsCount));
+  }, [data, questionsCount]);
 
   const handleUncorrect = () => {
     setIsChosen(questions[0].answer);
-    setWrong(wrong + 1);
+    setWrong(w => w + 1);
   };
   const handleСorrect = () => {
     setIsChosen("");
-    setQuestions(q=>q.slice(1));
+    setQuestions(q => q.slice(1));
   };
   const handleTryAgain = () => {
-    setQuestions (generateTest(data));
+    setQuestions (generateTest(data, questionsCount));
     setIsChosen("");
     setWrong(0);
   };

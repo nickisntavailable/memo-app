@@ -15,6 +15,7 @@ const Colleague = () => {
   const cards = useSelector<RootState>(
     (state: RootState) => state.data.colleagues
   ) as PersonType[];
+
   const [index, setIndex] = useState(0);
   const navigate = useNavigate()
 
@@ -34,7 +35,7 @@ const Colleague = () => {
             onChangeIndex={(idx) => setIndex(idx)}
           >
             {cards.map((card, idx) => (
-              <ColleagueCard card={card} />
+              <ColleagueCard card={card} key={idx} />
             ))}
           </SwipeableViews>
         </div>

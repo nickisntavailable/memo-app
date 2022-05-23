@@ -9,51 +9,48 @@ import { useEffect, useRef, useState } from "react";
 import Button from "components/Button/Button";
 import { ProgressBar } from "react-bootstrap";
 
-const questionsCount = 5;
+const generateTest = (data: ShortQUestionType[], questionsCount: number) => {
+  const rand = Math.floor(Math.random() * (data.length - questionsCount));
+  return data.slice(rand, rand + questionsCount);
+};
 
 const QuestionsShort = () => {
+  const questionsCount = useSelector<RootState>(
+    (state) => state.tests.shortTestLength
+  ) as number;
   const [questions, setQuestions] = useState<ShortQUestionType[]>([]);
   const data = useSelector<RootState>(
     (state) => state.data.questionsShort
   ) as ShortQUestionType[];
   const [showAnswer, setShowAnswer] = useState<string>("");
-  const [delay, setDelay] = useState<number>();
   const [count, setCount] = useState<number>(0);
-const r=useRef<number>()
+  const r = useRef<number>();
   const handleSwipe = (d: any, p: ShortQUestionType) => {
     setShowAnswer("");
-    window.clearTimeout(r.current)
+    window.clearTimeout(r.current);
 
     const rightDescition =
       ((d === "left" || d === "up") && p.answer) ||
       ((d === "right" || d === "down") && !p.answer);
-    const wrongDescition =
-      ((d === "left" || d === "up") && !p.answer) ||
-      ((d === "right" || d === "down") && p.answer);
 
     if (rightDescition) {
       setShowAnswer("right");
-      console.log("right", count);
-      setCount(count + 1);
-    } else if (wrongDescition) {
+      setCount((q) => q + 1);
+    } else if (!rightDescition) {
       setShowAnswer("wrong");
     }
     setQuestions(questions.slice(0, -1));
-    r.current=window.setTimeout(() => setShowAnswer(""), 5000)
+    r.current = window.setTimeout(() => setShowAnswer(""), 5000);
   };
-  const generateTest = (data: ShortQUestionType[]) => {
-    if (data && data.length > 0) {
-      const rand = Math.floor(Math.random() * (data.length - questionsCount));
-      setQuestions(data.slice(rand, rand + questionsCount));
-    }
-  };
+
   const tryAgain = () => {
     setCount(0);
-    generateTest(data);
+    generateTest(data, questionsCount);
   };
   useEffect(() => {
-    generateTest(data);
-  }, [data]);
+    setQuestions(generateTest(data, questionsCount));
+  }, [data, questionsCount]);
+
   //   https://ws3.morpher.ru/russian/declension?s=%D1%82%D0%B0%D0%BD%D1%86%D1%8B&format=json
   // апи для склонения слов по падежам
   // апи для получения женского или мужского рода
@@ -77,7 +74,6 @@ const r=useRef<number>()
                 className={"swiper"}
                 throwLimit={100}
                 contents={
-                  //fill this your element
                   <div className="questions-short-card">
                     {p.photo && (
                       <div

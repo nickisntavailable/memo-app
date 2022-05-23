@@ -1,0 +1,28 @@
+.settings {
+    margin: 0 auto;
+    max-width: 500px;
+    width: 100%;
+    p {
+        margin: 0;
+    }
+    &_group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        &_title {
+            flex: 1 1 100%;
+        }
+    }
+    &_saved {
+        margin: 20px auto !important;
+        text-align: center;
+        font-weight: bold;
+        color: green;
+        transition: .3s opacity ease-in-out;
+        opacity: 0;
+        &.active {
+            opacity: 1;
+        }
+    }
+}

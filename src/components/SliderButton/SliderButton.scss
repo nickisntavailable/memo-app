@@ -1,10 +1,12 @@
 .slider-btn {
   height: 400px;
-  flex: 1;
+  // flex: 1;
+  width: 15%;
+  max-width: 300px;
   border: none;
   outline: none;
   background-color: transparent;
-  border-radius: 10%;
+  border-radius: 10px;
   &:hover {
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     background-color: #1c9bdf11;

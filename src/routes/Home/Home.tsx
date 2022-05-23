@@ -1,5 +1,5 @@
 import NavItem from "../../components/NavItem/NavItem";
-
+import './Home.scss';
 
 const navigationItems = [
   {
@@ -14,13 +14,17 @@ const navigationItems = [
     title: "Пройти тест Да-Нет",
     url: "/questions-short",
   },
+  {
+    title: "Настройки",
+    url: "/settings",
+  },
 ];
 
 const Home = () => {
   return (
-    <div className="container-sm">
-      {navigationItems.map((item) => (
-        <NavItem {...item} />
+    <div className="container-sm home">
+      {navigationItems.map((item, idx) => (
+        <NavItem {...item} key={idx} />
       ))}      
     </div>
   );

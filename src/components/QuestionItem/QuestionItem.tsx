@@ -42,12 +42,11 @@ const QuestionItem = ({data, isChosen, setIsChosen }: QuestionItemProps) => {
     return (
         <div className="question-item">
             <div className="question-item-header">
-                {data.photo && <img src={data.photo} className="question-item-header-photo"/>}
+                {data.photo && <img src={data.photo} className="question-item-header-photo" alt="person" />}
                 <p className="title">{data.question}</p>
             </div>
             <div className="question-item-body">
                 {data.options.map((e, idx) => (
-                    // <div className="question-item-body-item">{e}</div>
                     <OptionsItem key={e+idx} data={e} isAnswer={data.answer === e} isChosen={isChosen} setIsChosen={() => setIsChosen(e)}/>
                 ))}
             </div>
