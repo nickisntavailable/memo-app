@@ -51,15 +51,18 @@ const generateGeneral = (
       possibleVariants,
       person[prop_name] as string
     );
+    shuffle(options)
     return {
       question: `${question1} ${person.name}?`,
       answer: person[prop_name] as string,
       options,
     };
   });
+  
   const resultArraySecondType = data.map((person, _, arr) => {
     if ((person[prop_name] as string) === STOP_WORD) return null;
     let options = getNameOptions(arr, person.name);
+    shuffle(options)
     return {
       question: `${question2} ${person[prop_name] as string}?`,
       answer: person.name,
@@ -139,8 +142,8 @@ function generatePhotoShort(data: PersonType[]): ShortQUestionType[] {
           ? `На фото изображен ${cur.name}?`
           : `На фото изображена ${cur.name}?`;
       return p.name === cur.name
-        ? { question, photo: cur.photo, answer: true }
-        : { question, photo: cur.photo, answer: false };
+        ? { question, photo: cur.photo, answer: false }
+        : { question, photo: cur.photo, answer: true };
     });
     return [...prev, ...mappedArr]
   }, [] as ShortQUestionType[]);

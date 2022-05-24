@@ -88,3 +88,10 @@
     }
   }
 }
+
+@media (max-width: 426px) {
+  .questions-short-cards, .questions-short .swiper {
+    width: 250px;
+    height: 350px;
+  }
+}

@@ -1,6 +1,5 @@
 import { FullQuestionType } from "app/types";
 import { useEffect, useState } from "react";
-import { isSemicolonClassElement } from "typescript";
 import "./QuestionItem.scss";
 
 type QuestionItemProps = {
@@ -30,8 +29,10 @@ const OptionsItem = ({data, isAnswer, isChosen, setIsChosen}: OptionsItemProps) 
     useEffect(() => {
         if(isChosen === data) {
             setHidden(hidden + ' active')
+        } else {
+            setHidden(isAnswer ? `question-item-body-item green` : `question-item-body-item red`)
         }
-    }, [isChosen])
+    }, [isChosen, data, hidden, isAnswer])
 
     return (
         <div className={hidden} onClick={clickHandler}>{data}</div>

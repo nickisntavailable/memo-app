@@ -1,5 +1,4 @@
 import { PersonType } from "app/types";
-import { url } from "inspector";
 import { useState } from "react";
 import "./ColleagueCard.scss";
 

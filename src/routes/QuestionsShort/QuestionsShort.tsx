@@ -40,12 +40,12 @@ const QuestionsShort = () => {
       setShowAnswer("wrong");
     }
     setQuestions(questions.slice(0, -1));
-    r.current = window.setTimeout(() => setShowAnswer(""), 5000);
+    r.current = window.setTimeout(() => setShowAnswer(""), 500);
   };
 
   const tryAgain = () => {
     setCount(0);
-    generateTest(data, questionsCount);
+    setQuestions(generateTest(data, questionsCount));
   };
   useEffect(() => {
     setQuestions(generateTest(data, questionsCount));
