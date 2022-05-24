@@ -36,7 +36,9 @@ const getOptionsFromPossibleVariants = (data: string[], breakWord: string) => {
 const generateGeneral = (
   data: PersonType[],
   question1: string,
+  question1Female: string,
   question2: string,
+  question2Female: string,
   prop_name: keyof PersonType
 ) => {
   const possibleVariants = (
@@ -53,7 +55,7 @@ const generateGeneral = (
     );
     shuffle(options)
     return {
-      question: `${question1} ${person.name}?`,
+      question: `${person.gender === 'м' ? question1 : question1Female} ${person.name}?`,
       answer: person[prop_name] as string,
       options,
     };
@@ -64,7 +66,7 @@ const generateGeneral = (
     let options = getNameOptions(arr, person.name);
     shuffle(options)
     return {
-      question: `${question2} ${person[prop_name] as string}?`,
+      question: `${person.gender === 'м' ? question2 : question2Female} ${person[prop_name] as string}?`,
       answer: person.name,
       options,
     };
@@ -93,12 +95,16 @@ export const generateQuestions = (data: PersonType[]) => {
   const questionswork = generateGeneral(
     data,
     "Где раньше работал",
+    "Где раньше работала",
+    "Кто из коллег раньше работал в комании",
     "Кто из коллег раньше работал в комании",
     "prev_work"
   );
   const questionsSport = generateGeneral(
     data,
     "Каким спортом занимается",
+    "Каким спортом занимается",
+    "Кто из коллег любит этот вид спорта - ",
     "Кто из коллег любит этот вид спорта - ",
     "sport"
   );

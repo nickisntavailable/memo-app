@@ -9,9 +9,7 @@ configure({ adapter: new Adapter() })
 
 it('first test for Button component', () => {
     const component = React.createElement(Button, {classes: 'test', children: 'Hello', onClick: () => null})
-
     const rComp = shallow(component)
-    // console.log(rComp)
     const wrapper = rComp.find('.btn')
     expect(wrapper.length).toBe(1)
 })

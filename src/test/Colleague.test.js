@@ -1,15 +1,15 @@
 import Colleague from "routes/Сolleague/Colleague";
-import React from "react";
+// import React from "react";
 import { shallow, configure, mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import * as redux from "react-redux";
-import * as ReactReduxHooks from "./react-redux-hooks";
+// import * as redux from "react-redux";
+// import * as ReactReduxHooks from "./react-redux-hooks";
 import { BrowserRouter } from "react-router-dom";
 import {Provider} from 'react-redux'
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk';
-import { Col } from "react-bootstrap";
+import ColleagueCard from '../components/ColleagueCard/ColleagueCard'
 
 configure({ adapter: new Adapter() });
 const mockStore = configureMockStore([thunk]);
@@ -97,8 +97,19 @@ describe("Colleague component", () => {
         </BrowserRouter>
       </Provider>
     )
-    // console.log(wrapper.state('index'))
     expect(wrapper.exists()).toBe(true);
+  })
+
+  it('should contain card container', () => {
+    const store = mockStore(storeData);
+    const wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Colleague/>
+        </BrowserRouter>
+      </Provider>
+    )
+    expect(wrapper.find(ColleagueCard)).toHaveLength(1);
   })
 });
 

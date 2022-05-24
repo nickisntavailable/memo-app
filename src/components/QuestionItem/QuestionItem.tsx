@@ -15,7 +15,7 @@ type OptionsItemProps = {
 }
 
 
-const OptionsItem = ({data, isAnswer, isChosen, setIsChosen}: OptionsItemProps) => {
+export const OptionsItem = ({data, isAnswer, isChosen, setIsChosen}: OptionsItemProps) => {
     let [hidden, setHidden] = useState(isAnswer ? `question-item-body-item green` : `question-item-body-item red`)
     
 
